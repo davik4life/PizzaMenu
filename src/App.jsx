@@ -6,8 +6,6 @@ export default function App() {
 		<>
 			<h1> Welcome To The Pizza Shop</h1>
 			<p>Delicious Pizza available today!</p>
-			<p>Delicious Pizza available today!</p>
-			<p>Delicious Pizza available today!</p>
 		</>
 	);
 }

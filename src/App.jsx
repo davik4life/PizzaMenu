@@ -1,12 +1,11 @@
 // import { useState } from "react";
 // import img from "/pizzas/funghi.jpg";
 import "./index.css";
-// import { pizzaData } from "./data.js";
+import { pizzaData } from "./data.js";
 
 export default function App() {
 	return (
 		<div className="container">
-			{/* <h1> Welcome To The Pizza Shop</h1> */}
 			<Header />
 			<Menu />
 			<Footer />
@@ -26,6 +25,24 @@ function Menu() {
 	return (
 		<main className="menu">
 			<h2>Our Menu</h2>
+			{pizzaData != [] ? (
+				<ul className="pizzas">
+					{pizzaData.map((pizza) => (
+						<Pizza pizzaObj={pizza} key={pizza.name} />
+					))}
+				</ul>
+			) : (
+				"We are currently out of Pizza's. We are working to make sure all these issues gets sorted."
+			)}
+			{/* 
+			Old Implementation...
+			{/* <Pizza
+						name={pizza.name}
+						ingredients={pizza.ingredients}
+						price={pizza.price}
+						photoName={pizza.photoName}
+						soldOut={pizza.soldOut}
+					/>
 			<Pizza
 				name="Pizza Funghi"
 				photoName="/pizzas/funghi.jpg"
@@ -37,21 +54,21 @@ function Menu() {
 				photoName="/pizzas/focaccia.jpg"
 				ingredients="Cheeze, Pure Flour, Salt, Sugar, Cream"
 				price={20}
-			/>
+			/>*/}
 		</main>
 	);
 }
 
 function Pizza(props) {
 	return (
-		<div className="pizza">
-			<img src={props.photoName} alt={props.name} />
+		<li className={props.pizzaObj.soldOut ? "pizza sold-out" : "pizza"}>
+			<img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
 			<div>
-				<h3>{props.name}</h3>
-				<p>{props.ingredients}</p>
-				<span>{props.price}</span>
+				<h3>{props.pizzaObj.name}</h3>
+				<p>{props.pizzaObj.ingredients}</p>
+				<span>{props.pizzaObj.price}</span>
 			</div>
-		</div>
+		</li>
 	);
 }
 
@@ -59,9 +76,23 @@ function Footer() {
 	const hour = new Date().getHours();
 	const openHour = 12;
 	const closedHour = 22;
-	const openOrClosed =
-		hour >= openHour && hour <= closedHour
-			? "We're currently Open!!!"
-			: "We're currently Closed!!!";
-	return <h1 className="footer">{openOrClosed}</h1>;
+	// const openOrClosed =
+	// 	hour >= openHour && hour <= closedHour
+	// 		? "We're currently Open!!!"
+	// 		: "We're currently Closed!!!";
+	return (
+		<h1 className="footer">
+			{hour >= openHour && hour <= closedHour ? (
+				<div className="order">
+					<p>
+						We're currently taking orders. Feel free to order online
+						or visit us!!!
+					</p>
+					<button className="btn">Order</button>
+				</div>
+			) : (
+				`We're currently Closed!!! Come back between the hours ${openHour}:00 and ${closedHour}:00`
+			)}
+		</h1>
+	);
 }

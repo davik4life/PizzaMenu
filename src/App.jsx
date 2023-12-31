@@ -83,16 +83,22 @@ function Footer() {
 	return (
 		<h1 className="footer">
 			{hour >= openHour && hour <= closedHour ? (
-				<div className="order">
-					<p>
-						We're currently taking orders. Feel free to order online
-						or visit us!!!
-					</p>
-					<button className="btn">Order</button>
-				</div>
+				<Order />
 			) : (
 				`We're currently Closed!!! Come back between the hours ${openHour}:00 and ${closedHour}:00`
 			)}
 		</h1>
+	);
+}
+
+function Order() {
+	return (
+		<div className="order">
+			<p>
+				We're currently taking orders. Feel free to order online or
+				visit us!!!
+			</p>
+			<button className="btn">Order</button>
+		</div>
 	);
 }

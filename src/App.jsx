@@ -74,7 +74,7 @@ function Pizza(props) {
 
 function Footer() {
 	const hour = new Date().getHours();
-	const openHour = 12;
+	const openHour = 10;
 	const closedHour = 22;
 	// const openOrClosed =
 	// 	hour >= openHour && hour <= closedHour
